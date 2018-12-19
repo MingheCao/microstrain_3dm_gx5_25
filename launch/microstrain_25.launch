@@ -12,7 +12,7 @@
   <node name="microstrain_3dm_gx5_25_node" 
   pkg="microstrain_3dm_gx5_45" 
   type="microstrain_3dm_gx5_45_node" output="screen">
-    <param name="port" value="/dev/microstrain" type="str" />
+    <param name="port" value="/dev/ttyUSB0" type="str" />
     <param name="baudrate" value="115200" type="int" />
 
     <param name="device_setup" value="true" type="bool" />
@@ -28,7 +28,7 @@
     <param name="imu_frame_id" value="imu_link" type="str" />
     <!-- Setting manual declination is not yet implemented/testes -->
     <!-- Declination source 1=None, 2=magnetic, 3=manual -->
-    <param name="declination_source" value="2" type="int" />
+    <param name="declination_source" value="1" type="int" />
     <param name="declination" value="0.23" type="double" />
 
     <!-- GPS Settings  -45 and -35 Only -->

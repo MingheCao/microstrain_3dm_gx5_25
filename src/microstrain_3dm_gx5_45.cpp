@@ -266,11 +266,11 @@ namespace Microstrain
 	// Declination Source
 	// Set declination
 	ROS_INFO("Setting declination source to %#04X",declination_source_u8);
-	while(mip_filter_declination_source(&device_interface_, MIP_FUNCTION_SELECTOR_WRITE, &declination_source_u8) != MIP_INTERFACE_OK){}
+	//while(mip_filter_declination_source(&device_interface_, MIP_FUNCTION_SELECTOR_WRITE, &declination_source_u8) != MIP_INTERFACE_OK){}
 	ros::Duration(dT).sleep();
 	//Read back the declination source
 	ROS_INFO("Reading back declination source");
-	while(mip_filter_declination_source(&device_interface_, MIP_FUNCTION_SELECTOR_READ, &readback_declination_source) != MIP_INTERFACE_OK){}
+	//while(mip_filter_declination_source(&device_interface_, MIP_FUNCTION_SELECTOR_READ, &readback_declination_source) != MIP_INTERFACE_OK){}
 	if(declination_source_u8 == readback_declination_source)
 	{
 	  ROS_INFO("Success: Declination source set to %#04X", declination_source_u8);
@@ -283,10 +283,10 @@ namespace Microstrain
 	if (save_settings)
 	{
 	  ROS_INFO("Saving declination source settings to EEPROM");
-	  while(mip_filter_declination_source(&device_interface_, 
-					      MIP_FUNCTION_SELECTOR_STORE_EEPROM,
-					      NULL) != MIP_INTERFACE_OK)
-	  {}
+	 // while(mip_filter_declination_source(&device_interface_, 
+	//				      MIP_FUNCTION_SELECTOR_STORE_EEPROM,
+	//				      NULL) != MIP_INTERFACE_OK)
+	 // {}
 	  ros::Duration(dT).sleep();
 	}
 	
