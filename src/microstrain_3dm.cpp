@@ -278,7 +278,7 @@ namespace Microstrain
       ROS_FATAL("Couldn't open serial port!  Is it plugged in?");
     }
 
-    // We want to get the default device info even if we don't setup the device
+    // We want to get the default device info evepublish_gps_n if we don't setup the device
     // Get device info
     start = clock();
     while (mip_base_cmd_get_device_info(&device_interface_, &device_info) != MIP_INTERFACE_OK)
@@ -313,7 +313,7 @@ namespace Microstrain
     }
     if (model_name == GX5_25_DEVICE)
     {
-      GX5_25 = true;
+      GX5_45 = true;
     }
     if (model_name == GX5_15_DEVICE)
     {
@@ -364,7 +364,7 @@ namespace Microstrain
       // Set GPS publishing to true if IMU model has GPS
       if (GX5_45 || GX5_35)
       {
-        private_nh.param("publish_gps", publish_gps_, true);
+        private_nh.param("publish_gps", publish_gps_, false);
         private_nh.param("publish_odom", publish_odom_, true);
       }
       else
@@ -715,17 +715,17 @@ namespace Microstrain
           data_stream_format_num_entries = 5;
         }
 
-        start = clock();
-        while (mip_3dm_cmd_filter_message_format(&device_interface_,
-            MIP_FUNCTION_SELECTOR_WRITE, &data_stream_format_num_entries,
-            data_stream_format_descriptors, data_stream_format_decimation) != MIP_INTERFACE_OK)
-        {
-          if (clock() - start > 5000)
-          {
-            ROS_INFO("mip_3dm_cmd_filter_message_format function timed out.");
-            break;
-          }
-        }
+        // start = clock();
+        // while (mip_3dm_cmd_filter_message_format(&device_interface_,
+        //     MIP_FUNCTION_SELECTOR_WRITE, &data_stream_format_num_entries,
+        //     data_stream_format_descriptors, data_stream_format_decimation) != MIP_INTERFACE_OK)
+        // {
+        //   if (clock() - start > 5000)
+        //   {
+        //     ROS_INFO("mip_3dm_cmd_filter_message_format function timed out.");
+        //     break;
+        //   }
+        // }
 
         ros::Duration(dT).sleep();
         // Poll to verify
@@ -3232,7 +3232,7 @@ namespace Microstrain
     if (!publish_odom_ && !publish_filtered_imu_)
       return;
 
-    // ROS_INFO("Filter callback");
+    ROS_INFO("Filter callback");
     // The packet callback can have several types, process them all
     switch (callback_type)
     {
@@ -3607,6 +3607,7 @@ namespace Microstrain
     mip_field_header *field_header;
     u8               *field_data;
     u16              field_offset = 0;
+    // ROS_INFO("AHRS callback");
     // If we aren't publishing, then return
     if (!publish_imu_)
       return;

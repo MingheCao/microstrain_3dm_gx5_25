@@ -3,7 +3,7 @@
   <!-- Standalone example launch file for 3DM-GX5-25 -->
 
   <!-- Declare arguments with default values -->
-  <arg name="port" default="/dev/microstrain" />
+  <arg name="port" default="/dev/ttyUSB0" />
   <arg name="baudrate" default="115200" />
   <arg name="imu_rate" default="100" />
   <arg name="imu_frame_id" default="gx5_link" />
@@ -26,7 +26,7 @@
     <param name="device_setup" value="true" type="bool" />
     <!-- General Settings -->
     <param name="readback_settings" value="true" type="bool" />
-    <param name="save_settings" value="true" type="bool" />
+    <param name="save_settings" value="false" type="bool" />
     <param name="auto_init" value="true" type="bool" />
 
     <!-- This parameter is to set wether the device orientation uses a basic 
@@ -41,8 +41,8 @@
     <param name="imu_rate" value="$(arg imu_rate)" type="int" />
     <param name="imu_frame_id" value="$(arg imu_frame_id)" type="str" />
     <!-- Declination source 1=None, 2=magnetic, 3=manual -->
-    <param name="declination_source" value="2" type="int" />
-    <param name="declination" value="0.23" type="double" />
+    <param name="declination_source" value="3" type="int" />
+    <param name="declination" value="0.0" type="double" />
     <!-- Filtered IMU rate is based on nav_rate since it is tied in with the onboard Kalman Filter -->
     <!-- If you set the filtered_imu rate to be something fairly high, make sure to lower the IMU rate
           above since it appears that the data rate can flood the USB. -->
