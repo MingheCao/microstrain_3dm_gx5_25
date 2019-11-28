@@ -3343,9 +3343,9 @@ namespace Microstrain
               else
               {
                 // put into ENU - swap X/Y, invert Z
-                quat_msg.x = q[1];
-                quat_msg.y = q[0];
-                quat_msg.z = -1.0*q[2];
+                quat_msg.x = q[0];
+                quat_msg.y = q[1];
+                quat_msg.z = q[2];
                 quat_msg.w = q[3];
               }
 
@@ -3504,6 +3504,8 @@ namespace Microstrain
         // Publish
         if (publish_odom_)
         {
+            nav_msg_.header.seq = filter_valid_packet_count_;
+            nav_msg_.header.stamp = ros::Time::now();
           nav_pub_.publish(nav_msg_);
         }
 
@@ -3719,9 +3721,9 @@ namespace Microstrain
               else
               {
                 // put into ENU - swap X/Y, invert Z
-                quat_msg.x = q[1];
-                quat_msg.y = q[0];
-                quat_msg.z = -1.0*q[2];
+                quat_msg.x = q[0];
+                quat_msg.y = q[1];
+                quat_msg.z = q[2];
                 quat_msg.w = q[3];
               }
 
